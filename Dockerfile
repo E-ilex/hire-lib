@@ -18,8 +18,6 @@ WORKDIR /app
 
 COPY --from=build /app/main .
 
-EXPOSE 3000
-
 ENV CGO_ENABLED=1
 
 CMD ["./main"]

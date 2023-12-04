@@ -1,3 +1,9 @@
+ifdef port
+app_port = $(port)
+else
+app_port := 3000
+endif
+
 createdb:
 	mkdir data && touch data/qa.sqlite3
 
@@ -23,7 +29,7 @@ build:
 	docker build -t toggl-server:latest .
 
 run:
-	docker run --name toggl-server -p 127.0.0.1:3000:300 toggl-server:latest -v /data/qa.sqlite3:/data/qa.sqlite3
+	docker run --name toggl-server -p $(app_port):$(app_port) toggl-server:latest -v /data/qa.sqlite3:/data/qa.sqlite3
 
 start:
 	docker start -i toggl-server
