@@ -8,7 +8,7 @@ const (
 	envDBDriverName      = "DB_DRIVER_HTL"
 	envDBDriverValue     = "sqlite3"
 	envDBDatasourceName  = "DB_DATASOURCE_HTL"
-	envDBDatasourceValue = "qa.sqlite3"
+	envDBDatasourceValue = "data/qa.sqlite3"
 )
 
 type Configuration struct {

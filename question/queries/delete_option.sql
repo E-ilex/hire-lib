@@ -1,0 +1,1 @@
+DELETE FROM option WHERE question_id = $1;

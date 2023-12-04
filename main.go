@@ -2,6 +2,7 @@ package main
 
 import (
 	"database/sql"
+	"fmt"
 	"hire-test-lib/config"
 	"hire-test-lib/question"
 	"hire-test-lib/utils"
@@ -49,7 +50,6 @@ func sqlliteConnection(cfg *config.Configuration) (*sql.DB, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer db.Close()
 
 	if err = db.Ping(); err != nil {
 		return nil, err
@@ -67,7 +67,7 @@ func (s *server) loadDatabase() {
 
 	s.database = connection
 	s.database.SetConnMaxLifetime(60 * time.Second)
-	s.database.SetMaxOpenConns(1)
+	s.database.SetMaxOpenConns(50)
 }
 
 func (s *server) loadService() {
@@ -90,16 +90,16 @@ func (s *server) loadRoutes() {
 	s.questionHandler = question.NewQuestionHandler(&s.logging, s.response, s.questionService)
 
 	s.router.Route("/v1/question", func(router chi.Router) {
-		s.router.Get("/", s.questionHandler.GetQuestions)
-		s.router.Post("/", s.questionHandler.CreateQuestion)
-		s.router.Put("/{questionID}", s.questionHandler.UpdateQuestion)
-		s.router.Delete("/{questionID}", s.questionHandler.DeleteQuestion)
+		router.Get("/", s.questionHandler.ListQuestions)
+		router.Post("/", s.questionHandler.CreateQuestion)
+		router.Put("/{questionID}", s.questionHandler.UpdateQuestion)
+		router.Delete("/{questionID}", s.questionHandler.DeleteQuestion)
 	})
 }
 
 func (s *server) run() {
 	s.logging.Info().Str(component, "server").Msg("starting service")
-	if err := http.ListenAndServe(s.config.Port, s.router); err != nil {
+	if err := http.ListenAndServe(fmt.Sprintf(":%s", s.config.Port), s.router); err != nil {
 		s.logging.Fatal().Err(err).Str(component, "server").Msg("could not run server")
 		return
 	}

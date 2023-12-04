@@ -1,0 +1,1 @@
+SELECT EXISTS(SELECT 1 FROM question WHERE id = $1)

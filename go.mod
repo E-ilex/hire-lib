@@ -3,6 +3,7 @@ module hire-test-lib
 go 1.21
 
 require (
+	github.com/asaskevich/govalidator v0.0.0-20230301143203-a9d515a09cc2
 	github.com/go-chi/chi/v5 v5.0.10
 	github.com/go-chi/render v1.0.3
 	github.com/mattn/go-sqlite3 v1.14.18

@@ -1,0 +1,1 @@
+INSERT INTO question (body) VALUES ($1) RETURNING *;
