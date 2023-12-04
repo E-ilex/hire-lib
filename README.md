@@ -31,10 +31,12 @@ How to create sqlite db
 How to run service
 
 1. Locally
-    1. run main.go
+    1. go mod vendor
+    2. go build
+    3. Run exec
 
 2. ~~Using Docker~~ 
-    1. I faced some problems with volume mounting after migrating from docker-compose to Dockerfile
+    1. I faced some problems with volume mounting after migrating from docker-compose to Dockerfile, so it won't work
 
 ### Curl
 
