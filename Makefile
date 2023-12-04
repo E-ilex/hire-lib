@@ -29,7 +29,7 @@ build:
 	docker build -t toggl-server:latest .
 
 run:
-	docker run --name toggl-server -p $(app_port):$(app_port) toggl-server:latest -v /data/qa.sqlite3:/data/qa.sqlite3
+	docker run --name toggl-server -p $(app_port):$(app_port) -v $(pwd)/data/qa.sqlite3:/app/data toggl-server:latest
 
 start:
 	docker start -i toggl-server

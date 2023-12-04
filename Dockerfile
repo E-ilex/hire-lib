@@ -14,6 +14,8 @@ RUN go build -o main
 
 FROM alpine:latest
 
+VOLUME /app/data
+
 WORKDIR /app
 
 COPY --from=build /app/main .
