@@ -1,0 +1,13 @@
+# Binarios for programs
+*.exe
+*.exe~
+vendor
+
+# env variables
+.env
+
+# VSCore user tailored files
+.vscode/*.json
+
+# DB
+data
